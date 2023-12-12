@@ -10,18 +10,9 @@ from bs4 import BeautifulSoup
 from google.cloud import vision
 from google.oauth2 import service_account
 
-google_credentials_info = {
-    "type": "service_account",
-    "project_id": "homework-cv",
-    "private_key_id": "f6f0637839a0abab4cdc385c3f2b3d0cb0571937",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCifgDe9b55X05M\nXNZ33gcz/yIXGMFBg3NLdbC0BSk79wLImgL1FZP2Yt/BQ86LTbTksfNlkUTQ4b2x\ngqbZFV+80gIIUiB3/swzBmOFuSn6Ped9Fnjq8UdHKDXw03WHuCPamdtms4SgdJcS\nitDoEPTz1XNSI9XCqwnSEOR+1MONnnzL5FNJRV9X/Erhuzio4hO/HXn22/i/OMvx\nPGZRvLUPmILji/puhC4Iq5jwyYSiSqUrO55xn+tVgxR7DGYadI4IbQVS4Lsw+seR\n6pV5ruuB3ijRXWRU/hzV2ftmvOOCcjzM7j6Ya1cW2ubauDyX9NHpTj8tjK/MWZR3\n8zoATq0FAgMBAAECggEAFNm5T+LVtapSmD7jcE8nunbXD4KoLblp3nl0Gq183Ip2\nK3qDvaIusdN/JcQHKV3nw97HvjU1UN5eonwC3+E7vzVteFbdfrhNyJBdzed0KP2v\niiALlQ4v2MQio8vmjWtGAoNyoUuQzawYRJNWeijO3cj6esRJZijfYjqzr0iq7S2A\nOsHway8tqPN4axz+lxpCY3IJ4W94VRYiq+1WpDO9VG60JVy9y5ZJFd4p9Be8KeYI\nj9hFjHmqPziCpDoQsm5OaZHo0dmJQmnzbQB6smgWhwmVauMVpKmqTax6htSbjyTY\nqf95tqljAr5lsmL/B5/FwmNQ5FxmjmKfbxQuxD8kYQKBgQDNv/zu+ZB3mfVuBYaB\nPMxRUURAbLCMJ3U4PjCVpqtNU42rWU2eextfZt5ReG16ZdMUHaurjiC5k+sHNLVS\nT/P7SuCiBMSAJ9OBc331+Gm6i0jhY1WvnZo7GkkV3DyVLalxpoZuRcbb2RGm9QZG\nkl/qsKlR9tiBawZ9fPogV04kUQKBgQDKLW4q2UkGPbISONfFh20gq6mqMLSxc0u0\nZFazI3QclXTWePiocONMr8wohK7F3CSwq6LfH9s6b4Pfh19ny5FOQ/RGFp6MaHmz\nKaUd7t3+5d4BebwiIbqkTlzhe5xwAeEL1/AIwfcIwtmRdRHqfvV/m5ut1Bv5kfrz\nfo3UAvXUdQKBgCo9w2EQza8wZaoL6lx4Lf5378pGRkzQAQnmArWGvV6ny8slD4F9\nBtakWPpi/h8F7rsPiGI1UNSo4LTfBmb60T2DVvEMh4dEJfFK085/DL3mwLS9Xycp\n9TMzJ1QcnjeGY2ZY6PqUysnyG+SqI3qzrIuTb3/LbRHM9k0nLncbVYixAoGAV5QI\nZe1L0bVF/ti6tykr33wc+ckxbLDZ+WGBoQXZlUw0mXc7l5OXErAQSvj20GTFS/Z9\njhO5nn2R7XExpb+ryPBszzObKI1VMoP2r5m6dmFSoub91PcxZ10+pLosEOTvfHbk\n1pZXEWd+YaEJyr+GTum0LT91gs12nKWUgGNr48UCgYA8LwW+OQT9spX80ebI0AQb\na1tYq7/TCgELMblJN+AV6zilJey4aqKe0q0xpjNFU9WjyAEpICW3al4ieIYzpMlW\niCzVxeGgDtO+KL3rC+MJvFKGBfnOJXhgrPwU727rPzzDz8mwxg4xU+mwtwIeWSZE\nS+fM0iP/+UjumoIwInh65A==\n-----END PRIVATE KEY-----\n",
-    "client_email": "cv-homework-varanytsia@homework-cv.iam.gserviceaccount.com",
-    "client_id": "117275442528205407633",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cv-homework-varanytsia%40homework-cv.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"}
+google_ocr_api_key_str = Variable.get("GOOGLE_OCR_API_KEY")
+
+google_credentials_info = json.loads(google_ocr_api_key_str)
 
 
 def read_urls_from_file(file_path):

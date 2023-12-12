@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  airflow-webserver:
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - _PIP_ADDITIONAL_REQUIREMENTS=openai==0.28 google-cloud-vision requests beautifulsoup4
+
+  airflow-scheduler:
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - _PIP_ADDITIONAL_REQUIREMENTS=google-cloud-vision requests beautifulsoup4
+
+  requirements:
+    image: python:3.11  # or your custom Dockerfile with 'build: path/to/Dockerfile'
+    volumes:
+      - .:/project
+      - pip38:/usr/local/lib/python3.11/site-packages
+    working_dir: /project
+    environment:
+      - _PIP_ADDITIONAL_REQUIREMENTS=google-cloud-vision requests beautifulsoup4
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2004
+      POSTGRES_DB: marketing
+    ports:
+      - "5432:5432"
+
+volumes:
+  pip38:
+    external: true

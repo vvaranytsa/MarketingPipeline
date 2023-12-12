@@ -1,0 +1,4 @@
+google-cloud-vision
+openai==0.28
+requests
+beautifulsoup4
